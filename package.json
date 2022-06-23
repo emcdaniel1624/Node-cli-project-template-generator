@@ -1,7 +1,7 @@
 {
   "name": "@ottercode/create-otterproj",
-  "version": "1.0.0",
-  "description": "Project generator for node with typescript",
+  "version": "1.0.2",
+  "description": "Ottercode project template generator",
   "main": "bin/cli.js",
   "bin": {
     "create-otterproj": "bin/cli.js"

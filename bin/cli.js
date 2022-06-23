@@ -20,9 +20,14 @@ const QUESTIONS = [
         message: 'Project name:'
     },
     {
+        name: 'description',
+        type: 'input',
+        message: 'Description:'
+    },
+    {
         name: 'author',
         type: 'input',
-        message: 'Project author:'
+        message: 'Author:'
     }
 ];
 
@@ -38,7 +43,7 @@ function createProject(projectPath) {
 
 const SKIP_FILES = ['node_modules', '.template.json'];
 
-function createDirectoryContents(templatePath, projectName, projectAuthor) {
+function createDirectoryContents(templatePath, projectName, projectAuthor, projectDescription) {
 
     // read all files/folders (1 level) from template folder
     const filesToCreate = fs.readdirSync(templatePath);
@@ -55,7 +60,7 @@ function createDirectoryContents(templatePath, projectName, projectAuthor) {
         if (stats.isFile()) {
             // read file content and transform it using template engine
             let contents = fs.readFileSync(origFilePath, 'utf8');
-            contents = ejs.render(contents, { projectName, projectAuthor });
+            contents = ejs.render(contents, { projectName, projectAuthor, projectDescription });
             // write file to destination folder
             const writePath = path.join(CURR_DIR, projectName, file);
             fs.writeFileSync(writePath, contents, 'utf8');
@@ -87,6 +92,7 @@ inquirer.prompt(QUESTIONS).then(answers => {
     const templateName = answers['template'];
     const projectName = answers['name'];
     const projectAuthor = answers['author'];
+    const projectDescription = answers['description'];
     const templatePath = path.join(__dirname, 'templates', templateName);
     const tartgetPath = path.join(CURR_DIR, projectName);
     const options = {
@@ -107,7 +113,7 @@ inquirer.prompt(QUESTIONS).then(answers => {
 
     console.log();
     console.log('Downloading files');
-    createDirectoryContents(templatePath, projectName, projectAuthor);
+    createDirectoryContents(templatePath, projectName, projectAuthor, projectDescription);
 
     console.log();
     console.log('Installing dependencies')
