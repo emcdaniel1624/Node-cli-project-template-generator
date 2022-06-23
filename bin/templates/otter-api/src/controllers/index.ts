@@ -1,0 +1,1 @@
+export * as objsController from "./obj.controller";

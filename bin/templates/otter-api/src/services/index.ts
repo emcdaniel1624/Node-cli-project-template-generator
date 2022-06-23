@@ -1,0 +1,1 @@
+export * as objService from "./obj.service";
