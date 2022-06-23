@@ -37,6 +37,7 @@ function createProject(projectPath) {
 }
 
 const SKIP_FILES = ['node_modules', '.template.json'];
+
 function createDirectoryContents(templatePath, projectName, projectAuthor) {
 
     // read all files/folders (1 level) from template folder
